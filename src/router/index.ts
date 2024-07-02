@@ -7,8 +7,8 @@ import TaskList from "@/components/TaskList.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "register",
+    component: Register,
   },
   { path: "/login", component: Login },
   { path: "/register", component: Register },
