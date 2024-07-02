@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000/api", // Your backend API base URL
-  withCredentials: true, // Send cookies with requests
+  baseURL: "https://taskmanagebackend-l0jp.onrender.com/api",
+  withCredentials: true,
 });
 
 export default apiClient;
