@@ -3,8 +3,9 @@
     <h2 class="text-xl font-semibold mb-2">{{ task.title }}</h2>
     <p class="text-gray-700">{{ task.description }}</p>
     <p class="text-gray-600">Status: {{ formatStatus(task.status) }}</p>
+    <p class="text-gray-600">Created by: {{ task.user?.username }}</p>
     <div class="flex mt-4">
-      <button @click="editing = true" class="btn-edit">Edit</button>
+      <button @click="editing = true" class="btn-edit mx-4">Edit</button>
       <button @click="$emit('deleteTask', task.id)" class="btn-delete">
         Delete
       </button>
@@ -22,6 +23,9 @@ interface Task {
   title: string;
   description: string;
   status: "TO_DO" | "IN_PROGRESS" | "DONE"; // Adjusted to match backend enum
+  user?: {
+    username: string;
+  };
 }
 
 export default defineComponent({

@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   { path: "/login", component: Login },
   { path: "/register", component: Register },
-  { path: "/tasks", component: TaskList },
+  { path: "/tasks", component: TaskList, meta: { requiresAuth: true } },
   {
     path: "/about",
     name: "about",
@@ -27,6 +27,14 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = !!localStorage.getItem("access_token");
+  if (to.matched.some((record) => record.meta.requiresAuth) && !isLoggedIn) {
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;

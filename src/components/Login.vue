@@ -16,6 +16,7 @@
           id="username"
           type="text"
           placeholder="Username"
+          required
         />
       </div>
       <div class="mb-6">
@@ -31,6 +32,7 @@
           id="password"
           type="password"
           placeholder="******************"
+          required
         />
       </div>
       <div class="flex items-center justify-between">
@@ -75,15 +77,19 @@ export default {
       apiClient
         .post("/auth/login", userData)
         .then((response) => {
-          const access_token = response.data.access_token;
-
-          // Store access token in local storage
-          localStorage.setItem("access_token", access_token);
-          this.$router.push('/tasks');
+          if (response.status === 201 || 200) {
+            const access_token = response.data.access_token;
+            // Store access token in local storage
+            localStorage.setItem("access_token", access_token);
+            this.$router.push("/tasks").then(() => {
+              window.location.reload();
+            });
+          }
         })
         .catch((error) => {
-          console.error("Registration error:", error);
-          // Handle error, e.g., show an error message
+          if (error.response.data.statusCode === 401) {
+            alert("Please Verify your login info");
+          }
         });
     },
   },

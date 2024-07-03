@@ -16,6 +16,7 @@
           id="username"
           type="text"
           placeholder="Username"
+          required
         />
       </div>
       <div class="mb-6">
@@ -31,6 +32,7 @@
           id="password"
           type="password"
           placeholder="******************"
+          required
         />
       </div>
       <div class="flex items-center justify-between">
